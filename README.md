@@ -7,21 +7,22 @@ host : http://123.207.138.78:8888/
 
 1.已经登陆但是没有报名
 
-		{ err: false,
-		  result: {
-             	type: 'it has access',
-          	    inf: //爬取的个人信息
-         }
+	{ 
+        err: false,
+		result: {
+            type: 'it has access',
+          	inf: //爬取的个人信息
+        }
 
 2.已经登陆且已经报名
 
 
     { 
         err: false, 
-       result: {
-   		      type: 'it has login',
-              inf: //报名的个人信息
-     }
+        result: {
+   		    type: 'it has login',
+            inf: //报名的个人信息
+    }
 
 3.没有登陆但是传参了
 
@@ -32,47 +33,59 @@ host : http://123.207.138.78:8888/
     {
    		err: false,
         result: {
-              session: sessionid,
-              src: srcs
-         }
+            session: sessionid,
+            src: srcs
+        }
     }
 
 
 5.获取验证码失败
 
     {
-                err: true,
-                errtype: "can't get vercode！"
-            }
+        err: true,
+        errtype: "can't get vercode！"
+    }
 ###  2.登陆接口 `"host+getaccess"` 
 #### 1.参数：name：学号，password:密码(之后会加密先用明文，记得留验证口)，session:验证码的sessionID,vercode验证码
 #### 2. 返回值：
-1. 没有参数:
+1.没有参数:
 `{ err: true, errtype: 'get info no params' }`
-2. 参数数目错误
+2.参数数目错误
 `{ err: true, errtype: 'Please check the number and type of the parameters' }`
-3. 登陆成功返回爬取数据(之后会验证需保存stateobj，此接口后续可能更改) 
+3.登陆成功返回爬取数据(之后会验证需保存stateobj，此接口后续可能更改) 
 ```
 {
     err: false,
     result: {
-                state: 'access', 
-                stateobj://爬取的个人信息 报名需要带上验证
-            }
+        state: 'access', 
+        stateobj://爬取的个人信息 报名需要带上验证
+    }
 }
 ```
-4. 登陆显示已经报名
+4.登陆显示已经报名
 ```
      {
-         err: false, 
-         result: {
-                    state: 'it has login',
-                    inf: //个人报名状态信息
-                  }
+        err: false, 
+        result: {
+            state: 'it has login',
+            inf: //个人报名状态信息
+        }
      }                    
 
 ```
-5. 教务错误登陆页面(未测试)
+5.登陆但未报名
+```
+
+   {
+        err: false, 
+            result: {
+            type: 'it has access',
+            inf://爬取的个人信息 报名需要带上验证
+            }
+    } 
+
+```
+5.教务错误登陆页面(未测试)
 ```
     {
         err: true,
@@ -81,53 +94,54 @@ host : http://123.207.138.78:8888/
 ```
 6.教务错误个人信息页面(未测试)
 ```
-{
-     err: true,
-     errtype: "can't get info by xs_main.aspx",
- }
+   {
+        err: true,
+        errtype: "can't get info by xs_main.aspx",
+   }
 ```
 7.验证码的session过期
 ```
-{
-    err: true,
-    errtype: "session is out",
-}
+    {
+        err: true,
+        errtype: "session is out",
+    }
 ```
 8.未评教
 ```
-{
-    err: false,
-    result:{state:'not Teaching evaluation||please check your Educational administration system'
+    {
+        err: false,
+        result:{
+            state:'not Teaching evaluation||please check your Educational administration system'
+        }
     }
-}
 ```
 9.验证码错误
 ```
-{
-     err: true,
-     errtype: 'vercode err'
-}
+    {
+        err: true,
+        errtype: 'vercode err'
+    }
 ```
 10.密码错误
 ```
-{
-    err: true,
-    errtype: 'password err'
-}
+    {
+        err: true,
+        errtype: 'password err'
+    }
 ```
 11.用户名不存在或未参加教学活动
 ```
-{
-    err: true,
-    errtype: "username err"
-}
+    {
+        err: true,
+        errtype: "username err"
+    }
 ```
 12.教务系统错误
 ```
-{
-    err: true,
-    errtype: "severs error"
-}
+    {
+        err: true,
+        errtype: "severs error"
+    }
 ```
 
 ### 3.报名接口 `host+login` 
