@@ -8,9 +8,9 @@ host : http://123.207.138.78:8888/
 1.已经登陆但是没有报名
 
 		{ err: false,
-		  obj: {
+		  result: {
              	type: 'it has access',
-          	    inf: req.session.personinf
+          	    inf: //爬取的个人信息
          }
 
 2.已经登陆且已经报名
@@ -18,9 +18,9 @@ host : http://123.207.138.78:8888/
 
     { 
         err: false, 
-        obj: {
+       result: {
    		      type: 'it has login',
-              inf: obj.result[0]
+              inf: //报名的个人信息
      }
 
 3.没有登陆但是传参了
@@ -44,7 +44,7 @@ host : http://123.207.138.78:8888/
                 err: true,
                 errtype: "can't get vercode！"
             }
-###  2.登陆接口 `"host+getinformation"` 
+###  2.登陆接口 `"host+getaccess"` 
 #### 1.参数：name：学号，password:密码(之后会加密先用明文，记得留验证口)，session:验证码的sessionID,vercode验证码
 #### 2. 返回值：
 1. 没有参数:
@@ -57,14 +57,83 @@ host : http://123.207.138.78:8888/
     err: false,
     result: {
                 state: 'access', 
-                stateobj:obj.result.inf
+                stateobj://爬取的个人信息 报名需要带上验证
             }
 }
 ```
+4. 登陆显示已经报名
+```
+     {
+         err: false, 
+         result: {
+                    state: 'it has login',
+                    inf: //个人报名状态信息
+                  }
+     }                    
+
+```
+5. 教务错误登陆页面(未测试)
+```
+    {
+        err: true,
+        errtype: "don't get info by default2.aspx"
+    }
+```
+6.教务错误个人信息页面(未测试)
+```
+{
+     err: true,
+     errtype: "can't get info by xs_main.aspx",
+ }
+```
+7.验证码的session过期
+```
+{
+    err: true,
+    errtype: "session is out",
+}
+```
+8.未评教
+```
+{
+    err: false,
+    result:{state:'not Teaching evaluation||please check your Educational administration system'
+    }
+}
+```
+9.验证码错误
+```
+{
+     err: true,
+     errtype: 'vercode err'
+}
+```
+10.密码错误
+```
+{
+    err: true,
+    errtype: 'password err'
+}
+```
+11.用户名不存在或未参加教学活动
+```
+{
+    err: true,
+    errtype: "username err"
+}
+```
+12.教务系统错误
+```
+{
+    err: true,
+    errtype: "severs error"
+}
+```
+
 ### 3.报名接口 `host+login` 
 #### 1.参数 username：学号 2.name:姓名 3.sex:性别 4. class：班级 5. direction：方向 6. tel ：电话 7. message：留言 (此接口带session,jsonp不需要修改直接发，ajaxcors需要添加参数 自行百度。。。)
 #### 2. 返回值
-1. 没有 session 状态为未通过
+1. session 状态为未通过
 ```
 { err: true, errtype: 'no access' }
 ```
