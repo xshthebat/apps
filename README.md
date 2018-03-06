@@ -1,5 +1,15 @@
 # 后台文档
-host : http://123.207.138.78:8888/
+host : https://join.xiyoumobile.com/api/
+
+带cookie方法
+$.ajax({
+        url: host + 'getaccess',
+        type: 'get',
+        data:person,
+        xhrFields: {
+            withCredentials: true   //这个参数
+        }
+})
 ## 纳新接口
 ###  1. 登录接口`host +getverCode：`
 #### 1.参数： 无 （带cookie jsonp不用写，cros ajax必须带上一些参数，具体百度,此接口会修改，留口)
@@ -46,7 +56,7 @@ host : http://123.207.138.78:8888/
         errtype: "can't get vercode！"
     }
 ###  2.登陆接口 `"host+getaccess"` 
-#### 1.参数：name：学号，password:密码(之后会加密先用明文，记得留验证口)，session:验证码的sessionID,vercode验证码
+#### 1.参数：username：学号，password:密码(之后会加密先用明文，记得留验证口)，session:验证码的sessionID,vercode验证码
 #### 2. 返回值：
 1.没有参数:
 `{ err: true, errtype: 'get info no params' }`
