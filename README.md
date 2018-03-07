@@ -185,4 +185,16 @@ $.ajax({
 ```
 { err: true, errtype: 'it has login' }
 ```
+8. 电话错误
+```
+{ err: true, errtype: 'tel err' }
+```
+9. 邮箱错误
+```
+{ err: true, errtype: 'email err' }
+```
+10. 方向错误
+```
+{ err: true, errtype: 'direction err' }
+```
 
