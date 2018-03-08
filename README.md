@@ -155,7 +155,7 @@ $.ajax({
 ```
 
 ### 3.报名接口 `host+login` 
-#### 1.参数 username：学号 2.name:姓名 3.sex:性别 4. class：班级 5. direction：方向 6. tel ：电话 7. message：留言 (此接口带session,jsonp不需要修改直接发，ajaxcors需要添加参数 自行百度。。。)
+#### 1.参数 username：学号 2.name:姓名 3.sex:性别 4. class：班级 5. direction：方向 6. tel ：电话 7.email邮箱 8. message：留言 (此接口带session,jsonp不需要修改直接发，ajaxcors需要添加参数 自行百度。。。)
 #### 2. 返回值
 1. session 状态为未通过
 ```
